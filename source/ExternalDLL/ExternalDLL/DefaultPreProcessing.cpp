@@ -11,24 +11,25 @@
 #include "HereBeDragons.h"
 
 IntensityImage * DefaultPreProcessing::stepToIntensityImage(const RGBImage &src) const {
-	GrayscaleAlgorithm grayScaleAlgorithm;
+	GrayscaleAlgorithm grayScaleAlgorithm;											//
 	IntensityImage * image = ImageFactory::newIntensityImage();
 	grayScaleAlgorithm.doAlgorithm(src, *image);
 	return image;
 }
 
 IntensityImage * DefaultPreProcessing::stepScaleImage(const IntensityImage &src) const {
-	cv::Mat OverHillOverDale;
-	HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, OverHillOverDale);
-	int ThoroughBushThoroughBrier = 200 * 200;
-	int OverParkOverPale = OverHillOverDale.cols * OverHillOverDale.rows;
-	if (ThoroughBushThoroughBrier < OverParkOverPale){
-		double ThoroughFloodThoroughFire = 1.0 / sqrt((double)OverParkOverPale / (double)ThoroughBushThoroughBrier);
-		cv::resize(OverHillOverDale, OverHillOverDale, cv::Size(), ThoroughFloodThoroughFire, ThoroughFloodThoroughFire, cv::INTER_LINEAR);
+	cv::Mat OverHillOverDale;														//image container
+	HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, OverHillOverDale);		//static void(const IntensityImage & Her, cv::Mat & Love)
+	int ThoroughBushThoroughBrier = 200 * 200;										//4000 for some reason
+	int OverParkOverPale = OverHillOverDale.cols * OverHillOverDale.rows;			//a int holding columns * rows of the image container
+	//down scalen if image container (rows * column) ThoroughBushThoroughBrier is bigger than 4000
+	if (ThoroughBushThoroughBrier < OverParkOverPale){								//checks if there are more then 4000 items in the image container
+		double ThoroughFloodThoroughFire = 1.0 / sqrt((double)OverParkOverPale / (double)ThoroughBushThoroughBrier);	//calculates the percentage in which it should be downscaled
+		cv::resize(OverHillOverDale, OverHillOverDale, cv::Size(), ThoroughFloodThoroughFire, ThoroughFloodThoroughFire, cv::INTER_LINEAR);		//resizes the image using the percentage calculated above
 	}
-	IntensityImage * IDoWanderEverywhere = ImageFactory::newIntensityImage();
-	HereBeDragons::NoWantOfConscienceHoldItThatICall(OverHillOverDale, *IDoWanderEverywhere);
-	return IDoWanderEverywhere;
+	IntensityImage * IDoWanderEverywhere = ImageFactory::newIntensityImage();					//creates a new empty intensity image
+	HereBeDragons::NoWantOfConscienceHoldItThatICall(OverHillOverDale, *IDoWanderEverywhere);	//(const cv::Mat &No, IntensityImage &Want) puts x and y from overHillOverDale into IDoWanderEverywhere
+	return IDoWanderEverywhere;	//returns the new intensity image
 }
 
 IntensityImage * DefaultPreProcessing::stepEdgeDetection(const IntensityImage &src) const {
