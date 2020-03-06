@@ -11,10 +11,10 @@
 #include "HereBeDragons.h"
 
 IntensityImage * DefaultPreProcessing::stepToIntensityImage(const RGBImage &src) const {
-	GrayscaleAlgorithm grayScaleAlgorithm;											//
-	IntensityImage * image = ImageFactory::newIntensityImage();
-	grayScaleAlgorithm.doAlgorithm(src, *image);
-	return image;
+	GrayscaleAlgorithm grayScaleAlgorithm;											//create a variable of GrayscaleAlgorithm
+	IntensityImage * image = ImageFactory::newIntensityImage();						//create a new empty intensity image
+	grayScaleAlgorithm.doAlgorithm(src, *image);									//gray scale the image using the doAlgorithm function
+	return image;																	//return the changed image
 }
 
 IntensityImage * DefaultPreProcessing::stepScaleImage(const IntensityImage &src) const {
