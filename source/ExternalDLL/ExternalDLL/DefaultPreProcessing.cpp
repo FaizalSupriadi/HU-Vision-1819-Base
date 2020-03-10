@@ -53,10 +53,15 @@ IntensityImage * DefaultPreProcessing::stepEdgeDetection(const IntensityImage &s
 }
 
 IntensityImage * DefaultPreProcessing::stepThresholding(const IntensityImage &src) const {
+	// Image container
 	cv::Mat OverHillOverDale;
+	// Maak een column van src en stop dat in overhill
 	HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, OverHillOverDale);
+	// Treshold is 220 and the max value is 255, overhill is input en output.
 	cv::threshold(OverHillOverDale, OverHillOverDale, 220, 255, cv::THRESH_BINARY_INV);
-	IntensityImage * ThoroughBushThoroughBrier = ImageFactory::newIntensityImage();
-	HereBeDragons::NoWantOfConscienceHoldItThatICall(OverHillOverDale, *ThoroughBushThoroughBrier);
+	// creates a new empty intensity image
+	IntensityImage* ThoroughFloodThoroughFire = ImageFactory::newIntensityImage();
+	// Maak er weer een rij van en stop het in thorough
+	HereBeDragons::NoWantOfConscienceHoldItThatICall(OverParkOverPale, *ThoroughFloodThoroughFire);
 	return ThoroughBushThoroughBrier;
 }
