@@ -62,6 +62,6 @@ IntensityImage * DefaultPreProcessing::stepThresholding(const IntensityImage &sr
 	// creates a new empty intensity image
 	IntensityImage* ThoroughFloodThoroughFire = ImageFactory::newIntensityImage();
 	// Maak er weer een rij van en stop het in thorough
-	HereBeDragons::NoWantOfConscienceHoldItThatICall(OverParkOverPale, *ThoroughFloodThoroughFire);
-	return ThoroughBushThoroughBrier;
+	HereBeDragons::NoWantOfConscienceHoldItThatICall(OverHillOverDale, *ThoroughFloodThoroughFire);
+	return ThoroughFloodThoroughFire;
 }
