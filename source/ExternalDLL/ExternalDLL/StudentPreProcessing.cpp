@@ -14,33 +14,49 @@ IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &imag
 
 IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &src) const {
 	// Image container
-	cv::Mat OverHillOverDale;
-	//HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, OverHillOverDale);
+	cv::Mat imageContainer;
 
-	int w = src.getWidth();
-	int h = src.getHeight();
+	HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, imageContainer);
 
-	OverHillOverDale.create(h, w, CV_8UC1);
+	float weight = 3;
 
-	for (int x = 0; x < OverHillOverDale.cols; x++) {
-		for (int y = 0; y < OverHillOverDale.rows; y++) {
-			OverHillOverDale.at<uchar>(y, x) = src.getPixel(x, y);
-		}
-	}
-
-	cv::Mat prewittx = (cv::Mat_<float>(3, 3) << 1, 0, -1, 1, 0, -1, 1, 0, -1);
-	cv::Mat prewitty = (cv::Mat_<float>(3, 3) << 1, 1, 1, 0, 0, 0, -1, -1, -1);
+	/*cv::Mat prewittx = (cv::Mat_<float>(3, 3) << 1*weight, 0, -1*weight, 1*weight, 0, -1*weight, 1*weight, 0, -1*weight);
+	cv::Mat prewitty = (cv::Mat_<float>(3, 3) << -1*weight, -1*weight, -1*weight, 0, 0, 0, 1*weight, 1*weight, 1*weight);
+	cv::Mat image;
+	HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, image);
+	cv::Mat prewittx = (cv::Mat_<float>(3, 3) << 1, 0, -1, 1, 0, -1, 1, 0, -1 );
+	cv::Mat prewitty = (cv::Mat_<float>(3, 3) << 1, 1, 1, 0, 0, 0, -1, -1, -1 );
 	// Image container als output
 	cv::Mat prewittxResult;
 	cv::Mat prewittyResult;
 	// Convuleer de afbeelding met de kernel, overhill is input, overpark is output
-	filter2D(OverHillOverDale, prewittxResult, CV_8U, prewittx, cv::Point(-1, -1));
-	filter2D(OverHillOverDale, prewittyResult, CV_8U, prewitty, cv::Point(-1, -1));
+	filter2D(imageContainer, prewittxResult, -1, prewittx, cv::Point(-1, -1));
+	filter2D(imageContainer, prewittyResult, -1, prewitty, cv::Point(-1, -1));
 	// creates a new empty intensity image
-	IntensityImage* ThoroughFloodThoroughFire = ImageFactory::newIntensityImage();
-	// Maak er weer een rij van en stop het in thorough
-	HereBeDragons::NoWantOfConscienceHoldItThatICall(prewittxResult + prewittyResult, *ThoroughFloodThoroughFire);
-	return ThoroughFloodThoroughFire;
+	IntensityImage* edgeDetectionImage = ImageFactory::newIntensityImage();
+	HereBeDragons::NoWantOfConscienceHoldItThatICall(prewittxResult + prewittyResult, *edgeDetectionImage);*/
+
+
+	//cv::Mat sobelx = (cv::Mat_<float>(3, 3) << -1, 0, 1, -2 * weight, 0, 2 * weight, -1, 0, 1);
+	//cv::Mat sobely = (cv::Mat_<float>(3, 3) << -1, -2 * weight, -1, 0, 0, 0, 1, 2 * weight, 1);
+
+	cv::Mat sobelx = (cv::Mat_<float>(3, 3) << -1, 0, 1, -2 , 0, 2, -1, 0, 1);
+	cv::Mat sobely = (cv::Mat_<float>(3, 3) << -1, -2 , -1, 0, 0, 0, 1, 2 , 1);
+
+	cv::Mat sobelxResult;
+	cv::Mat sobelyResult;
+
+	
+	filter2D(imageContainer, sobelxResult, -1, sobelx, cv::Point(-1, -1));
+	filter2D(imageContainer, sobelyResult, -1, sobely, cv::Point(-1, -1));
+
+	IntensityImage* edgeDetectionImage = ImageFactory::newIntensityImage();
+	cv::Mat weighted;
+	// Weighted both by 3, experiment with numbers
+	cv::addWeighted(sobelxResult, 3, sobelyResult, 3, 0, weighted,-1);
+	HereBeDragons::NoWantOfConscienceHoldItThatICall(weighted, *edgeDetectionImage);
+
+	return edgeDetectionImage;
 }
 
 IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &src) const {
@@ -56,7 +72,7 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &sr
 	// Adaptive treshold, de minimum wordt door de gaussian treshold bepaalt.
     //cv::adaptiveThreshold(container, container, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C, cv::THRESH_BINARY, 15, 10);
 	cv::GaussianBlur(container, container, cv::Size(5, 5), 0);
-	cv::threshold(container, container, 0, 255, cv::THRESH_BINARY_INV + cv::THRESH_OTSU);
+	cv::threshold(container, container, 0, 255, cv::THRESH_BINARY + cv::THRESH_OTSU);
 	// creates a new empty intensity image
 	IntensityImage* intensity = ImageFactory::newIntensityImage();
 	// Maak er weer een rij van en stop het in thorough
