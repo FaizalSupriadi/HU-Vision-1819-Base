@@ -26,6 +26,12 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &s
 	/*cv::Mat prewittx = (cv::Mat_<float>(3, 3) << 1*weight, 0, -1*weight, 1*weight, 0, -1*weight, 1*weight, 0, -1*weight);
 	cv::Mat prewitty = (cv::Mat_<float>(3, 3) << -1*weight, -1*weight, -1*weight, 0, 0, 0, 1*weight, 1*weight, 1*weight);
 
+	cv::Mat image;
+	HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, image);
+
+	cv::Mat prewittx = (cv::Mat_<float>(3, 3) << 1, 0, -1, 1, 0, -1, 1, 0, -1 );
+	cv::Mat prewitty = (cv::Mat_<float>(3, 3) << 1, 1, 1, 0, 0, 0, -1, -1, -1 );
+	// Image container als output
 	cv::Mat prewittxResult;
 	cv::Mat prewittyResult;
 
@@ -74,3 +80,4 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &sr
 	HereBeDragons::NoWantOfConscienceHoldItThatICall(container, *intensity);
 	return intensity;
 }
+
