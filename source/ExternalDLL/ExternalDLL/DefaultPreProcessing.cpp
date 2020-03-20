@@ -37,27 +37,32 @@ IntensityImage * DefaultPreProcessing::stepScaleImage(const IntensityImage &src)
 
 IntensityImage * DefaultPreProcessing::stepEdgeDetection(const IntensityImage &src) const {
 	
-	auto start = high_resolution_clock::now();
-
-	cv::Mat OverHillOverDale;
-	
-	HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, OverHillOverDale);
-	
-	cv::Mat ThoroughBushThoroughBrier = (cv::Mat_<float>(9, 9) << 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 
-																  0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 
-																 -4, -4, -4, 1, 1, 1, 1, 1, 1, -4, -4, -4, 1, 1, 1, 1, 1, 1, 
-																 -4, -4, -4, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 
-																  1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0);
-	cv::Mat OverParkOverPale;
-
-	filter2D(OverHillOverDale, OverParkOverPale, CV_8U, ThoroughBushThoroughBrier, cv::Point(-1, -1), 0, cv::BORDER_DEFAULT);
 	IntensityImage* ThoroughFloodThoroughFire = ImageFactory::newIntensityImage();
+	microseconds totalDuration = milliseconds(0);
 
-	HereBeDragons::NoWantOfConscienceHoldItThatICall(OverParkOverPale, *ThoroughFloodThoroughFire);
+	for (int i = 0; i < 1000; i++) {
 
-	auto stop = high_resolution_clock::now();
-	auto duration = duration_cast<microseconds>(stop - start);
-	std::cout << "-----------------------------" << duration.count() << std::endl;
+		auto start = high_resolution_clock::now();
+
+		cv::Mat OverHillOverDale;
+
+		HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, OverHillOverDale);
+
+		cv::Mat ThoroughBushThoroughBrier = (cv::Mat_<float>(9, 9) << 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+			0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1,
+			-4, -4, -4, 1, 1, 1, 1, 1, 1, -4, -4, -4, 1, 1, 1, 1, 1, 1,
+			-4, -4, -4, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+			1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0);
+		cv::Mat OverParkOverPale;
+
+		filter2D(OverHillOverDale, OverParkOverPale, CV_8U, ThoroughBushThoroughBrier, cv::Point(-1, -1), 0, cv::BORDER_DEFAULT);
+
+		HereBeDragons::NoWantOfConscienceHoldItThatICall(OverParkOverPale, *ThoroughFloodThoroughFire);
+
+		auto stop = high_resolution_clock::now();
+		totalDuration += duration_cast<microseconds>(stop - start);
+	}
+	std::cout << "-----------------------------" << totalDuration.count() << std::endl;
 
 	return ThoroughFloodThoroughFire;
 }

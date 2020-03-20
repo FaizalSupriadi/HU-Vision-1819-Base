@@ -21,9 +21,9 @@ IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &imag
 IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &src) const {
 	
 	IntensityImage* edgeDetectionImage = ImageFactory::newIntensityImage();
-	microseconds totalDuration;
+	microseconds totalDuration = milliseconds(0);
 
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 1000; i++) {
 		auto start = high_resolution_clock::now();
 
 		cv::Mat imageContainer;
@@ -45,41 +45,46 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &s
 		HereBeDragons::NoWantOfConscienceHoldItThatICall(weighted, *edgeDetectionImage);
 
 		auto stop = high_resolution_clock::now();
-		auto duration = duration_cast<microseconds>(stop - start);
-		std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>" << duration.count() << std::endl;
-
+		totalDuration += duration_cast<microseconds>(stop - start);
 	}
-	std::cout << "-----------------------------" << totalDuration.count() / 100 << std::endl;
+	std::cout << "-----------------------------" << totalDuration.count() / 1000 << std::endl;
 	
 	return edgeDetectionImage;
 
-	/*auto start = high_resolution_clock::now();
-
-	cv::Mat imageContainer;
-
-	HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, imageContainer);
-
-	cv::Mat sobelx = (cv::Mat_<float>(3, 3) << -1, 0, 1, -2, 0, 2, -1, 0, 1);
-	cv::Mat sobely = (cv::Mat_<float>(3, 3) << -1, -2, -1, 0, 0, 0, 1, 2, 1);
-
-	cv::Mat sobelxResult;
-	cv::Mat sobelyResult;
-
-	filter2D(imageContainer, sobelxResult, -1, sobelx, cv::Point(-1, -1));
-	filter2D(imageContainer, sobelyResult, -1, sobely, cv::Point(-1, -1));
-
+	
+	
 	IntensityImage* edgeDetectionImage = ImageFactory::newIntensityImage();
+	microseconds totalDuration = milliseconds(0);
 
-	cv::Mat weighted;
-	cv::addWeighted(sobelxResult, 3, sobelyResult, 3, 0, weighted, -1);
+	for (int i = 0; i < 1000; i++) {
+		auto start = high_resolution_clock::now();
 
-	HereBeDragons::NoWantOfConscienceHoldItThatICall(weighted, *edgeDetectionImage);
+		cv::Mat imageContainer;
 
-	auto stop = high_resolution_clock::now();
-	auto duration = duration_cast<microseconds>(stop - start);
-	std::cout << "-----------------------------" << duration.count() << std::endl;
+		HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, imageContainer);
 
-	return edgeDetectionImage;*/
+		cv::Mat sobelx = (cv::Mat_<float>(3, 3) << -1, 0, 1, -2, 0, 2, -1, 0, 1);
+		cv::Mat sobely = (cv::Mat_<float>(3, 3) << -1, -2, -1, 0, 0, 0, 1, 2, 1);
+
+		cv::Mat sobelxResult;
+		cv::Mat sobelyResult;
+
+		filter2D(imageContainer, sobelxResult, -1, sobelx, cv::Point(-1, -1));
+		filter2D(imageContainer, sobelyResult, -1, sobely, cv::Point(-1, -1));
+
+		IntensityImage* edgeDetectionImage = ImageFactory::newIntensityImage();
+
+		cv::Mat weighted;
+		cv::addWeighted(sobelxResult, 3, sobelyResult, 3, 0, weighted, -1);
+
+		HereBeDragons::NoWantOfConscienceHoldItThatICall(weighted, *edgeDetectionImage);
+
+		auto stop = high_resolution_clock::now();
+		totalDuration += duration_cast<microseconds>(stop - start);
+	}
+	std::cout << "-----------------------------" << totalDuration.count() << std::endl;
+
+	return edgeDetectionImage;
 }
 
 IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &src) const {
