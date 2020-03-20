@@ -62,7 +62,7 @@ IntensityImage * DefaultPreProcessing::stepEdgeDetection(const IntensityImage &s
 		auto stop = high_resolution_clock::now();
 		totalDuration += duration_cast<microseconds>(stop - start);
 	}
-	std::cout << "-----------------------------" << totalDuration.count() << std::endl;
+	std::cout << "-----------------------------" << totalDuration.count() / 1000 << std::endl;
 
 	return ThoroughFloodThoroughFire;
 }

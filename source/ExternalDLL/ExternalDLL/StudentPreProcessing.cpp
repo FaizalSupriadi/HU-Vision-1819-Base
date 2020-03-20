@@ -72,8 +72,6 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &s
 		filter2D(imageContainer, sobelxResult, -1, sobelx, cv::Point(-1, -1));
 		filter2D(imageContainer, sobelyResult, -1, sobely, cv::Point(-1, -1));
 
-		IntensityImage* edgeDetectionImage = ImageFactory::newIntensityImage();
-
 		cv::Mat weighted;
 		cv::addWeighted(sobelxResult, 3, sobelyResult, 3, 0, weighted, -1);
 
@@ -82,7 +80,7 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &s
 		auto stop = high_resolution_clock::now();
 		totalDuration += duration_cast<microseconds>(stop - start);
 	}
-	std::cout << "-----------------------------" << totalDuration.count() << std::endl;
+	std::cout << "-----------------------------" << totalDuration.count() / 1000 << std::endl;
 
 	return edgeDetectionImage;
 }
