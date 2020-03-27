@@ -19,7 +19,9 @@ IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &imag
 }
 
 IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &src) const {
+	// To use, comment all the code you don't want to use
 	
+	// This is the speed test code
 	IntensityImage* edgeDetectionImage = ImageFactory::newIntensityImage();
 	microseconds totalDuration = milliseconds(0);
 
@@ -51,8 +53,7 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &s
 	
 	return edgeDetectionImage;
 
-	
-	
+	/*	
 	IntensityImage* edgeDetectionImage = ImageFactory::newIntensityImage();
 	microseconds totalDuration = milliseconds(0);
 
@@ -83,6 +84,55 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &s
 	std::cout << "-----------------------------" << totalDuration.count() / 1000 << std::endl;
 
 	return edgeDetectionImage;
+	*/
+	/* 
+	// This is the memory test code
+		cv::Mat imageContainer;
+		HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, imageContainer);
+
+		cv::Mat prewittx = (cv::Mat_<float>(3, 3) << 1, 0, -1, 1, 0, -1, 1, 0, -1);
+		cv::Mat prewitty = (cv::Mat_<float>(3, 3) << 1, 1, 1, 0, 0, 0, -1, -1, -1);
+
+		cv::Mat prewittxResult;
+		cv::Mat prewittyResult;
+
+
+		filter2D(imageContainer, prewittxResult, -1, prewittx, cv::Point(-1, -1));
+		filter2D(imageContainer, prewittyResult, -1, prewitty, cv::Point(-1, -1));
+
+		cv::Mat weighted;
+		cv::addWeighted(prewittxResult, 3, prewittyResult, 3, 0, weighted, -1);
+
+		IntensityImage* edgeDetectionImage = ImageFactory::newIntensityImage();
+
+		HereBeDragons::NoWantOfConscienceHoldItThatICall(weighted, *edgeDetectionImage);
+
+		return edgeDetectionImage;
+	}
+	*/
+	/*
+		cv::Mat imageContainer;
+		HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, imageContainer);
+
+		cv::Mat sobelx = (cv::Mat_<float>(3, 3) << -1, 0, 1, -2, 0, 2, -1, 0, 1);
+		cv::Mat sobely = (cv::Mat_<float>(3, 3) << -1, -2, -1, 0, 0, 0, 1, 2, 1);
+
+		cv::Mat sobelxResult;
+		cv::Mat sobelyResult;
+
+		filter2D(imageContainer, sobelxResult, -1, sobelx, cv::Point(-1, -1));
+		filter2D(imageContainer, sobelyResult, -1, sobely, cv::Point(-1, -1));
+
+		cv::Mat weighted;
+		cv::addWeighted(sobelxResult, 3, sobelyResult, 3, 0, weighted, -1);
+
+		IntensityImage* edgeDetectionImage = ImageFactory::newIntensityImage();
+
+		HereBeDragons::NoWantOfConscienceHoldItThatICall(weighted, *edgeDetectionImage);
+
+	return edgeDetectionImage;
+	*/
+	
 }
 
 IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &src) const {
