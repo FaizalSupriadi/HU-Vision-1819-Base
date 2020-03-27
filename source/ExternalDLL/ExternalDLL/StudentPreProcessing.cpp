@@ -56,33 +56,33 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &s
 	/*	
 	// This is part of the speed test code
 	IntensityImage* edgeDetectionImage = ImageFactory::newIntensityImage();
-	microseconds totalDuration = milliseconds(0);
+	microseconds totalDuration = milliseconds(0);						//reset timer to 0
 
 	for (int i = 0; i < 1000; i++) {
-		auto start = high_resolution_clock::now();
+		auto start = high_resolution_clock::now();					//start the timer
 
-		cv::Mat imageContainer;
+		cv::Mat imageContainer;								//buffer for the image
 
-		HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, imageContainer);
+		HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, imageContainer);	//
 
-		cv::Mat sobelx = (cv::Mat_<float>(3, 3) << -1, 0, 1, -2, 0, 2, -1, 0, 1);
-		cv::Mat sobely = (cv::Mat_<float>(3, 3) << -1, -2, -1, 0, 0, 0, 1, 2, 1);
+		cv::Mat sobelx = (cv::Mat_<float>(3, 3) << -1, 0, 1, -2, 0, 2, -1, 0, 1);	//sobel x
+		cv::Mat sobely = (cv::Mat_<float>(3, 3) << -1, -2, -1, 0, 0, 0, 1, 2, 1);	//sobel y
 
-		cv::Mat sobelxResult;
-		cv::Mat sobelyResult;
+		cv::Mat sobelxResult;								//save point for the sobel x
+		cv::Mat sobelyResult;								//save point for the sobel y
 
-		filter2D(imageContainer, sobelxResult, -1, sobelx, cv::Point(-1, -1));
-		filter2D(imageContainer, sobelyResult, -1, sobely, cv::Point(-1, -1));
+		filter2D(imageContainer, sobelxResult, -1, sobelx, cv::Point(-1, -1));		//use the kernel of sobel x and save it in sobelxResult	
+		filter2D(imageContainer, sobelyResult, -1, sobely, cv::Point(-1, -1));		//use the kernel of sobel y and save it in sobelyResult
 
-		cv::Mat weighted;
-		cv::addWeighted(sobelxResult, 3, sobelyResult, 3, 0, weighted, -1);
+		cv::Mat weighted;								//add a weight to make it more accurate
+		cv::addWeighted(sobelxResult, 3, sobelyResult, 3, 0, weighted, -1);		//use the weight to change the result
 
 		HereBeDragons::NoWantOfConscienceHoldItThatICall(weighted, *edgeDetectionImage);
 
-		auto stop = high_resolution_clock::now();
-		totalDuration += duration_cast<microseconds>(stop - start);
+		auto stop = high_resolution_clock::now();					//stop the clock
+		totalDuration += duration_cast<microseconds>(stop - start);			//calculate the time that has been passed
 	}
-	std::cout << "-----------------------------" << totalDuration.count() / 1000 << std::endl;
+	std::cout << "-----------------------------" << totalDuration.count() / 1000 << std::endl;	//display the average result
 
 	return edgeDetectionImage;
 	*/
