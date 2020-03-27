@@ -70,22 +70,22 @@ IntensityImage * DefaultPreProcessing::stepEdgeDetection(const IntensityImage &s
 	*/
 	// Code voor geheugen experiment
 	cv::Mat OverHillOverDale;
-		HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, OverHillOverDale);
+	HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, OverHillOverDale);
 
-		cv::Mat ThoroughBushThoroughBrier = (cv::Mat_<float>(9, 9) << 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1,
-			0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1,
-			-4, -4, -4, 1, 1, 1, 1, 1, 1, -4, -4, -4, 1, 1, 1, 1, 1, 1,
-			-4, -4, -4, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0,
-			1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0);
-		cv::Mat OverParkOverPale;
+	cv::Mat ThoroughBushThoroughBrier = (cv::Mat_<float>(9, 9) << 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+		0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1,
+		-4, -4, -4, 1, 1, 1, 1, 1, 1, -4, -4, -4, 1, 1, 1, 1, 1, 1,
+		-4, -4, -4, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+		1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0);
+	cv::Mat OverParkOverPale;
 
-		filter2D(OverHillOverDale, OverParkOverPale, CV_8U, ThoroughBushThoroughBrier, cv::Point(-1, -1), 0, cv::BORDER_DEFAULT);
+	filter2D(OverHillOverDale, OverParkOverPale, CV_8U, ThoroughBushThoroughBrier, cv::Point(-1, -1), 0, cv::BORDER_DEFAULT);
 
-		IntensityImage* ThoroughFloodThoroughFire = ImageFactory::newIntensityImage();
+	IntensityImage* ThoroughFloodThoroughFire = ImageFactory::newIntensityImage();
 
-		HereBeDragons::NoWantOfConscienceHoldItThatICall(OverParkOverPale, *ThoroughFloodThoroughFire);
+	HereBeDragons::NoWantOfConscienceHoldItThatICall(OverParkOverPale, *ThoroughFloodThoroughFire);
 
-		return ThoroughFloodThoroughFire;
+	return ThoroughFloodThoroughFire;
 }
 
 IntensityImage * DefaultPreProcessing::stepThresholding(const IntensityImage &src) const {
