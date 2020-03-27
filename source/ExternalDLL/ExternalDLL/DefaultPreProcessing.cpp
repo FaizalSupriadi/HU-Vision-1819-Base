@@ -36,7 +36,9 @@ IntensityImage * DefaultPreProcessing::stepScaleImage(const IntensityImage &src)
 }
 
 IntensityImage * DefaultPreProcessing::stepEdgeDetection(const IntensityImage &src) const {
-	
+	// To use, comment all the code you don't want to use
+	/*
+	// Code voor snelheids experiment
 	IntensityImage* ThoroughFloodThoroughFire = ImageFactory::newIntensityImage();
 	microseconds totalDuration = milliseconds(0);
 
@@ -65,6 +67,25 @@ IntensityImage * DefaultPreProcessing::stepEdgeDetection(const IntensityImage &s
 	std::cout << "-----------------------------" << totalDuration.count() / 1000 << std::endl;
 
 	return ThoroughFloodThoroughFire;
+	*/
+	// Code voor geheugen experiment
+	cv::Mat OverHillOverDale;
+		HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, OverHillOverDale);
+
+		cv::Mat ThoroughBushThoroughBrier = (cv::Mat_<float>(9, 9) << 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+			0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1,
+			-4, -4, -4, 1, 1, 1, 1, 1, 1, -4, -4, -4, 1, 1, 1, 1, 1, 1,
+			-4, -4, -4, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+			1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0);
+		cv::Mat OverParkOverPale;
+
+		filter2D(OverHillOverDale, OverParkOverPale, CV_8U, ThoroughBushThoroughBrier, cv::Point(-1, -1), 0, cv::BORDER_DEFAULT);
+
+		IntensityImage* ThoroughFloodThoroughFire = ImageFactory::newIntensityImage();
+
+		HereBeDragons::NoWantOfConscienceHoldItThatICall(OverParkOverPale, *ThoroughFloodThoroughFire);
+
+		return ThoroughFloodThoroughFire;
 }
 
 IntensityImage * DefaultPreProcessing::stepThresholding(const IntensityImage &src) const {
