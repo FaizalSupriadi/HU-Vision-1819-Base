@@ -24,7 +24,7 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &s
 	// This is part of the speed test code
 	IntensityImage* edgeDetectionImage = ImageFactory::newIntensityImage();
 	microseconds totalDuration = milliseconds(0);
-
+	
 	for (int i = 0; i < 1000; i++) {
 		auto start = high_resolution_clock::now();
 
