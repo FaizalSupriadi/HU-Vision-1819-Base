@@ -21,7 +21,7 @@ IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &imag
 IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &src) const {
 	// To use, comment all the code you don't want to use
 	
-	// This is the speed test code
+	// This is part of the speed test code
 	IntensityImage* edgeDetectionImage = ImageFactory::newIntensityImage();
 	microseconds totalDuration = milliseconds(0);
 
@@ -54,6 +54,7 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &s
 	return edgeDetectionImage;
 
 	/*	
+	// This is part of the speed test code
 	IntensityImage* edgeDetectionImage = ImageFactory::newIntensityImage();
 	microseconds totalDuration = milliseconds(0);
 
@@ -86,7 +87,7 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &s
 	return edgeDetectionImage;
 	*/
 	/* 
-	// This is the memory test code
+	// This is part of the memory test code
 		cv::Mat imageContainer;
 		HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, imageContainer);
 
@@ -108,9 +109,9 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &s
 		HereBeDragons::NoWantOfConscienceHoldItThatICall(weighted, *edgeDetectionImage);
 
 		return edgeDetectionImage;
-	}
 	*/
 	/*
+		// This is part of the memory test code
 		cv::Mat imageContainer;
 		HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, imageContainer);
 
@@ -130,7 +131,7 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &s
 
 		HereBeDragons::NoWantOfConscienceHoldItThatICall(weighted, *edgeDetectionImage);
 
-	return edgeDetectionImage;
+		return edgeDetectionImage;
 	*/
 	
 }
